@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<!-- rpjCalc, a simple reverse polish notation calculator -->
+
+<!-- Copyright (C) 2016, Douglas W. Bell -->
+
+<!-- This program is free software: you can redistribute it and/or modify
+     it under the terms of the GNU Affero General Public License, either
+     version 3 of the License, or any later version.  This program is
+     distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
+     See <http://www.gnu.org/licenses/> for details. -->
+
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="rpjcalc.css" />
+    <link rel="icon" href="favicon.png" />
+
+    <title>rpjCalc</title>
+</head>
+
+<body>
+
+    <div class="outerbox">
+        <div class="lcdbox">
+            <div id="regValue"></div>
+            <div id="xValue"></div>
+        </div>
+        <table>
+            <tr>
+                <td><button type="button" id="x^2" class="funcbutton"
+                    onclick="buttonPress(this)">x^2</button></td>
+                <td><button type="button" id="sqrt" class="funcbutton"
+                    onclick="buttonPress(this)">sqRT</button></td>
+                <td><button type="button" id="y^x" class="funcbutton"
+                    onclick="buttonPress(this)">y^X</button></td>
+                <td><button type="button" id="xrt" class="funcbutton"
+                    onclick="buttonPress(this)">xRT</button></td>
+                <td><button type="button" id="rcip" class="funcbutton"
+                    onclick="buttonPress(this)">RCIP</button></td>
+            </tr><tr>
+                <td><button type="button" id="sin" class="funcbutton"
+                    onclick="buttonPress(this)">SIN</button></td>
+                <td><button type="button" id="cos" class="funcbutton"
+                    onclick="buttonPress(this)">COS</button></td>
+                <td><button type="button" id="tan" class="funcbutton"
+                    onclick="buttonPress(this)">TAN</button></td>
+                <td><button type="button" id="ln" class="funcbutton"
+                    onclick="buttonPress(this)">LN</button></td>
+                <td><button type="button" id="e^x" class="funcbutton"
+                    onclick="buttonPress(this)">e^X</button></td>
+            </tr><tr>
+                <td><button type="button" id="asin" class="funcbutton"
+                    onclick="buttonPress(this)">ASIN</button></td>
+                <td><button type="button" id="acos" class="funcbutton"
+                    onclick="buttonPress(this)">ACOS</button></td>
+                <td><button type="button" id="atan" class="funcbutton"
+                    onclick="buttonPress(this)">ATAN</button></td>
+                <td><button type="button" id="log" class="funcbutton"
+                    onclick="buttonPress(this)">LOG</button></td>
+                <td><button type="button" id="tn^x" class="funcbutton"
+                    onclick="buttonPress(this)">tn^X</button></td>
+            </tr><tr>
+                <td><button type="button" id="sto" class="funcbutton"
+                    onclick="buttonPress(this)">STO</button></td>
+                <td><button type="button" id="rcl" class="funcbutton"
+                    onclick="buttonPress(this)">RCL</button></td>
+                <td><button type="button" id="r<" class="funcbutton"
+                    onclick="buttonPress(this)">R&lt;</button></td>
+                <td><button type="button" id="r>" class="funcbutton"
+                    onclick="buttonPress(this)">R&gt;</button></td>
+                <td><button type="button" id="x<>y" class="funcbutton"
+                    onclick="buttonPress(this)">x&lt;&gt;y</button></td>
+            </tr><tr>
+                <td><button type="button" id="show" class="funcbutton"
+                    onclick="buttonPress(this)">SHOW</button></td>
+                <td><button type="button" id="reg" class="funcbutton"
+                    onclick="buttonPress(this)">REG</button></td>
+                <td><button type="button" id="plcs" class="funcbutton"
+                    onclick="buttonPress(this)">PLCS</button></td>
+                <td><button type="button" id="sci" class="funcbutton"
+                    onclick="buttonPress(this)">SCI</button></td>
+                <td><button type="button" id="deg" class="funcbutton"
+                    onclick="buttonPress(this)">DEG</button></td>
+            </tr><tr>
+                <td><button type="button" id="clr" class="funcbutton"
+                    onclick="buttonPress(this)">CLR</button></td>
+                <td><button type="button" id="pi" class="funcbutton"
+                    onclick="buttonPress(this)">Pi</button></td>
+                <td><button type="button" id="exp" class="funcbutton"
+                    onclick="buttonPress(this)">EXP</button></td>
+                <td><button type="button" id="chs" class="funcbutton"
+                    onclick="buttonPress(this)">CHS</button></td>
+                <td><button type="button" id="<-" class="funcbutton"
+                    onclick="buttonPress(this)">&lt;-</button></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td><button type="button" id="opt" class="numbutton"
+                    onclick="buttonPress(this)">OPT</button></td>
+                <td><button type="button" id="/" class="numbutton"
+                    onclick="buttonPress(this)">/</button></td>
+                <td><button type="button" id="*" class="numbutton"
+                    onclick="buttonPress(this)">*</button></td>
+                <td><button type="button" id="-" class="numbutton"
+                    onclick="buttonPress(this)">-</button></td>
+            </tr><tr>
+                <td><button type="button" id="7" class="numbutton"
+                    onclick="buttonPress(this)">7</button></td>
+                <td><button type="button" id="8" class="numbutton"
+                    onclick="buttonPress(this)">8</button></td>
+                <td><button type="button" id="9" class="numbutton"
+                    onclick="buttonPress(this)">9</button></td>
+                <td rowspan="2"><button type="button" id="+"
+                    class="vdblnumbutton"
+                    onclick="buttonPress(this)">+</button></td>
+            </tr><tr>
+                <td><button type="button" id="4" class="numbutton"
+                    onclick="buttonPress(this)">4</button></td>
+                <td><button type="button" id="5" class="numbutton"
+                    onclick="buttonPress(this)">5</button></td>
+                <td><button type="button" id="6" class="numbutton"
+                    onclick="buttonPress(this)">6</button></td>
+            </tr><tr>
+                <td><button type="button" id="1" class="numbutton"
+                    onclick="buttonPress(this)">1</button></td>
+                <td><button type="button" id="2" class="numbutton"
+                    onclick="buttonPress(this)">2</button></td>
+                <td><button type="button" id="3" class="numbutton"
+                    onclick="buttonPress(this)">3</button></td>
+                <td rowspan="2"><button type="button" id="ent"
+                    class="vdblnumbutton"
+                    onclick="buttonPress(this)">ENT</button></td>
+            </tr><tr>
+                <td colspan="2"><button type="button" id="0"
+                    class="hdblnumbutton"
+                    onclick="buttonPress(this)">0</button></td>
+                <td><button type="button" id="." class="numbutton"
+                    onclick="buttonPress(this)">.</button></td>
+            </tr>
+        </table>
+        <div class="innerbox">
+            <table>
+                <tr>
+                    <td>&gt; <span id="entrystring"></span></td>
+                    <td id="statusstring"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="optdialog" class="modal-background">
+        <div class="modal-box">
+            <div class="modal-header">
+                <table>
+                    <tr>
+                        <td>rpjCalc Options</td>
+                        <td id="closebutton">X</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-content">
+                <form id="opt" action="">
+                    <input type="checkbox" id="showreg" />
+                    <label for="showreg">Show registers in display</label>
+                    <br />
+                    <input type="checkbox" id="scinot" />
+                    <label for="scinot">Force scientific notation</label>
+                    <br />
+                    <input type="checkbox" id="storestack" />
+                    <label for="storestack">Restore stack values</label>
+                    <br /><br />
+                    Decimal Places:
+                    <input type="number" id="decplcs" min="0" max="9" />
+                    <br /><br />
+                    Angle Units: <select id="angunits">
+                        <option value="deg">Degrees</option>
+                        <option value="rad">Radians</option>
+                        <option value="grad">Gradians</option>
+                    </select>
+                    <br /><br />
+                    <input type="button" id="submitbutton" value="Submit" />
+                    <input type="button" id="resetbutton" value="Reset" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="rpjcalc.js"></script>
+
+</body>
+
+</html>
