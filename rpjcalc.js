@@ -8,6 +8,7 @@
 //  distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
 //  See <http://www.gnu.org/licenses/> for details.
 
+"use strict";
 var progName = "rpjCalc";
 var version = "0.1.0";
 
@@ -108,7 +109,7 @@ function Stack() {
         return text;
     }
     this.numStr = function(num) {
-        absNum = Math.abs(num);
+        var absNum = Math.abs(num);
         if (sciNotation || absNum >= 1e7 || (absNum <= 1e-4 && absNum != 0)) {
             var str = num.toExponential(decPlaces);
         } else {
@@ -176,9 +177,9 @@ function EvalKey(label, evalText) {
     this.evalText = evalText;
 }
 EvalKey.prototype.execKey = function() {
-    x = stack.values[0];
-    y = stack.values[1];
-    result = eval(this.evalText);
+    var x = stack.values[0];
+    var y = stack.values[1];
+    var result = eval(this.evalText);
     stack.replaceXY(result);
     state = mode.SAVEMODE;
 }
@@ -190,14 +191,14 @@ function UnaryEvalKey(label, evalText) {
     this.evalText = evalText;
 }
 UnaryEvalKey.prototype.execKey = function() {
-    x = stack.values[0];
-    result = eval(this.evalText);
+    var x = stack.values[0];
+    var result = eval(this.evalText);
     stack.replaceX(result);
     state = mode.SAVEMODE;
 }
 
 var keys = {};
-for (i = 0; i < 10; i++) {
+for (var i = 0; i < 10; i++) {
     label = i.toString();
     keys[label] = new NumKey(label);
 }
@@ -465,49 +466,42 @@ setTimeout(function() {
 }, 2000);
 
 window.addEventListener("keydown", onKeyDown, false);
+window.addEventListener("keypress", onKeyPress, false);
 
 function onKeyDown(e) {
-    if (optModal.style.display == "block") {
-        return;
-    }
-    if (e.key.length == 1) {
-        entryString += e.key;
-    } else if (e.key == "Backspace") {
+    // handle nonprintable backspace key
+    if (e.which == 8 && optModal.style.display != "block") {
         if (entryString) {
             entryString = entryString.slice(0, -1);
         } else {
             entryString = "<-";
         }
-    } else if (!(entryString)) {
-        switch (e.key) {
-            case "Enter":
-                entryString = "\r";
-                break;
-            case "Add":
-                entryString = "+";
-                break;
-            case "Subtract":
-                entryString = "-";
-                break;
-            case "Multiply":
-                entryString = "*";
-                break;
-            case "Divide":
-                entryString = "/";
-                break;
-            default:
-                return;
-        }
-    } else {
-        return;
+        handleEntry();
+        e.preventDefault();
     }
+}
+
+function onKeyPress(e) {
+    // handle printable key presses
+    if (optModal.style.display != "block") {
+        var code = e.which;
+        var chr = String.fromCharCode(code);
+        if (code == 13) chr = "\r";  // enter key
+        if (chr) {
+            entryString += chr;
+            handleEntry();
+        }
+    }
+}
+
+function handleEntry() {
+    // handle key press changes to the entry string
     var key = keys[entryString.toLowerCase()];
     if (key && (state < mode.MEMSTOMODE || !(isNaN(Number(key.label))))) {
         entryString = "";
         key.execKey();
         updateDisplay();
         buttonDown(document.getElementById(key.label));
-        e.preventDefault();
     } else if (!(partialKeys[entryString.toLowerCase()])) {
         entryString = entryString.slice(0, -1);
     } else if (state >= mode.MEMSTOMODE) {
