@@ -14,6 +14,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=22rem, initial-scale=1.0" />
     <link rel="stylesheet" href="rpjcalc.css" />
     <link rel="icon" href="favicon.png" />
 
@@ -135,31 +136,23 @@
                     onclick="buttonPress(this)">ENT</button></td>
             </tr><tr>
                 <td colspan="2"><button type="button" id="0"
-                    class="hdblnumbutton"
+                    class="numbutton"
                     onclick="buttonPress(this)">0</button></td>
                 <td><button type="button" id="." class="numbutton"
                     onclick="buttonPress(this)">.</button></td>
             </tr>
         </table>
         <div class="innerbox">
-            <table>
-                <tr>
-                    <td>&gt; <span id="entrystring"></span></td>
-                    <td id="statusstring"></td>
-                </tr>
-            </table>
+                    &gt; <span id="entrystring"></span>
+                    <div id="statusstring"></div>
         </div>
     </div>
 
     <div id="optdialog" class="modal-background">
         <div class="modal-box">
             <div class="modal-header">
-                <table>
-                    <tr>
-                        <td>rpjCalc Options</td>
-                        <td id="closebutton">X</td>
-                    </tr>
-                </table>
+                rpjCalc - Options
+                <div id="closebutton">X</div>
             </div>
             <div class="modal-content">
                 <form id="opt" action="">

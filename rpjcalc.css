@@ -8,26 +8,21 @@
     distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
     See <http://www.gnu.org/licenses/> for details.  */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: #30231d;
     color: #ffffcf;
 }
 
-a {
-    color: #8ff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
 .outerbox {
-    width: 316px;
+    width: 20rem;
     border: 5px solid #6a5750;
     border-radius: 24px;
     padding: 4px 10px;
-    margin: 30px auto;
+    margin: 1rem;
     background: #b5a397;
 }
 
@@ -35,7 +30,7 @@ a:hover {
     border: 3px inset #50433d;
     border-radius: 8px;
     padding: 6px;
-    margin: 8px 0px;
+    margin: 8px 0;
     background: #6a5750;
     color: #ffffaf;
 }
@@ -44,7 +39,7 @@ a:hover {
     border: 3px inset #50433d;
     border-radius: 8px;
     padding: 3px;
-    margin: 8px 0px;
+    margin: 8px 0;
     background: #6a5750;
     font-size: 80%;
 }
@@ -60,7 +55,7 @@ a:hover {
 }
 
 #statusstring {
-    text-align: right;
+    float: right;
 }
 
 sup {
@@ -71,15 +66,23 @@ sup {
 }
 
 table {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
+}
+
+td {
+    padding: 2px;
 }
 
 button {
-    margin: 2px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    padding-top: 2px;
+    width: 100%;
+    vertical-align: middle;
     border: 3px outset #d5c3b7;
     border-radius: 8px;
     background: #6a5750;
@@ -87,23 +90,15 @@ button {
 }
 
 .funcbutton {
-    width: 56px;
-    height: 24px;
+    height: 1.5rem;
 }
 
 .numbutton {
-    width: 72px;
-    height: 26px;
+    height: 1.7rem;
 }
 
 .vdblnumbutton {
-    width: 72px;
-    height: 58px;
-}
-
-.hdblnumbutton {
-    width: 153px;
-    height: 26px;
+    height: 3.6rem;
 }
 
 .modal-background {
@@ -139,6 +134,7 @@ button {
 }
 
 #closebutton {
-    text-align: right;
+    float: right;
     cursor: pointer;
+    font-family:sans-serif;
 }
