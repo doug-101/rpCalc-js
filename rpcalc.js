@@ -1,4 +1,4 @@
-//  rpjCalc, a simple reverse polish notation calculator
+//  rpCalc, a simple reverse polish notation calculator
 
 //  Copyright (C) 2016, Douglas W. Bell
 
@@ -9,7 +9,7 @@
 //  See <http://www.gnu.org/licenses/> for details.
 
 "use strict";
-var progName = "rpjCalc";
+var progName = "rpCalc";
 var version = "0.1.0";
 
 var mode = {
